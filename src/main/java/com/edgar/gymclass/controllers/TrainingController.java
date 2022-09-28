@@ -15,6 +15,8 @@ public class TrainingController {
 	@Autowired
 	private TrainingService t_serv;
 	
+	
+	@Autowired
 	private TrainingRepository t_repo;
 	
 	// add
