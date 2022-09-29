@@ -36,32 +36,33 @@ public class TrainingService {
 	}
 
 	// update one
-	
-	public Training updateOne(long id , Training training) {
+
+	public Training updateOne(long id, Training training) {
 		training.setId(id);
 		return trainingRepo.save(training);
 	}
 
 	// delete one
-	public void deleteOne(long id ) {
+	public void deleteOne(long id) {
 		trainingRepo.deleteById(id);
 	}
-	
-	//register for Training	
+
+	// register for Training
 	public void registerClientForTraining(long trainingId, Set<Client> client) {
 		Optional<Training> trainingOpt = trainingRepo.findById(trainingId);
-		
-		
-		// if id not present 
-		if(!trainingOpt.isPresent()) {
+
+		// if id not present
+		if (!trainingOpt.isPresent()) {
 			throw new IllegalStateException("failed to register client. Invalid training Id  ::" + trainingId);
+		} 
+		else {
+
+			Training training = trainingOpt.get();
+			client.addAll(training.getClients());
+			training.setClients(client);
+			trainingRepo.save(training);
+
 		}
-		
-		Training training = trainingOpt.get();
-		client.addAll(training.getClients());
-		training.setClients(client);
-		trainingRepo.save(training);
-		
 	}
 
 }

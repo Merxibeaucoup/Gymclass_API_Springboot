@@ -1,15 +1,12 @@
 package com.edgar.gymclass.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Schedule {
@@ -20,26 +17,28 @@ public class Schedule {
 	private Long id;
 	
 	
-	private LocalDateTime startDate;
+	private LocalDate startDate;
 	
-	private LocalDateTime endDate;
+	private LocalDate endDate;
 	
 	private Long duration;
 	
 	private String location;
 	
-	@OneToOne( cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER) 
-	private Training training;
+	
+	
+	public Schedule() {
+		
+	}
 
-	public Schedule(Long id, LocalDateTime startDate, LocalDateTime endDate, Long duration, String location,
-			Training training) {
+	public Schedule(Long id, LocalDate startDate, LocalDate endDate, Long duration, String location) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.duration = duration;
 		this.location = location;
-		this.training = training;
+		
 	}
 
 	public Long getId() {
@@ -50,19 +49,19 @@ public class Schedule {
 		this.id = id;
 	}
 
-	public LocalDateTime getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDateTime startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDateTime getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(LocalDateTime endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
@@ -82,23 +81,17 @@ public class Schedule {
 		this.location = location;
 	}
 
-	public Training getTraining() {
-		return training;
-	}
-
-	public void setTraining(Training training) {
-		this.training = training;
-	}
+	
 
 	@Override
 	public String toString() {
 		return "Schedule [id=" + id + ", starteDate=" + startDate + ", endDate=" + endDate + ", duration=" + duration
-				+ ", location=" + location + ", training=" + training + "]";
+				+ ", location=" + location + ", training=" +   "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(duration, endDate, id, location, startDate, training);
+		return Objects.hash(duration, endDate, id, location, startDate);
 	}
 
 	@Override
@@ -112,7 +105,7 @@ public class Schedule {
 		Schedule other = (Schedule) obj;
 		return Objects.equals(duration, other.duration) && Objects.equals(endDate, other.endDate)
 				&& Objects.equals(id, other.id) && Objects.equals(location, other.location)
-				&& Objects.equals(startDate, other.startDate) && Objects.equals(training, other.training);
+				&& Objects.equals(startDate, other.startDate) ;
 	}
 
 	

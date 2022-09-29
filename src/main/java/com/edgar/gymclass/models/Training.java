@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -32,9 +33,9 @@ public class Training {
 	@NotBlank
 	private String type;
 
+	
 	@Column(nullable = false)
-	@NotBlank
-	private Long maxClassSize;
+	private long maxClassSize;
 
 	@Column
 	private Integer attendees ;
@@ -42,13 +43,19 @@ public class Training {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Client> clients;
 
-	@Column(nullable = false)
+	
+	@OneToOne( cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER) 
 	private Trainer trainer;
 
-	@Column(nullable = false)
+	
+	@OneToOne( cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER) 
 	private Schedule schedule;
 
 	
+	
+	public Training() {
+		
+	}
 
 	public Training(Long id, @NotBlank String className, @NotBlank String intensity, @NotBlank String type,
 			@NotBlank Long maxClassSize, Integer attendees, Set<Client> clients, Trainer trainer, Schedule schedule) {

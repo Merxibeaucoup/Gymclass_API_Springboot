@@ -11,7 +11,11 @@ import javax.validation.constraints.NotBlank;
 @Entity
 public class Client extends Person  {
 	
+
 	
+	public Client() {
+		
+	}
 	
 	
 	public Client(Long id, @NotBlank String fullname) {

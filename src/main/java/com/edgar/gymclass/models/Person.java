@@ -19,6 +19,10 @@ public class Person {
 	@Column(nullable = false)
 	@NotBlank
 	private String fullname;
+	
+	public Person() {
+		
+	}
 
 	public Person(Long id, @NotBlank String fullname) {
 		super();
